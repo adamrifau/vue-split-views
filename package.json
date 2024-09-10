@@ -1,6 +1,6 @@
 {
-	"name": "vue-split-view",
-	"version": "0.0.0-semantic-release",
+	"name": "vue-split-views",
+	"version": "0.0.1-redev",
 	"description": "Create a resizable split-view to partition the UI",
 	"keywords": [
 		"vue",
