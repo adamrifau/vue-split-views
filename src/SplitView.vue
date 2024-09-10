@@ -111,17 +111,39 @@ export default {
 			const { container } = this.$refs;
 			const containerOffset = getPosition(container);
 			let offset;
-
+		
 			if (this.isVertical) {
 				offset = pageY - containerOffset.y;
 				offset = Math.min(offset, container.offsetHeight);
 			} else {
-				offset = pageX - containerOffset.x;
+				const isRTL = window.getComputedStyle(container).direction === 'rtl';
+				if (isRTL) {
+					// For RTL, reverse the calculation
+					offset = container.offsetWidth - (pageX - containerOffset.x);
+				} else {
+					offset = pageX - containerOffset.x;
+				}
 				offset = Math.min(offset, container.offsetWidth);
 			}
-
+		
 			return Math.max(offset, 0);
 		},
+
+		// mouseOffset({ pageX, pageY }) {
+		// 	const { container } = this.$refs;
+		// 	const containerOffset = getPosition(container);
+		// 	let offset;
+
+		// 	if (this.isVertical) {
+		// 		offset = pageY - containerOffset.y;
+		// 		offset = Math.min(offset, container.offsetHeight);
+		// 	} else {
+		// 		offset = pageX - containerOffset.x;
+		// 		offset = Math.min(offset, container.offsetWidth);
+		// 	}
+
+		// 	return Math.max(offset, 0);
+		// },
 
 		dragging(event) {
 			this.offset = this.mouseOffset(event);
